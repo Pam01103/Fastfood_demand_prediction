@@ -1,14 +1,13 @@
-Aquí tienes un **README.md claro, profesional y listo para tu repositorio**, basado en la información que compartiste.
-Si quieres que lo convierta en un archivo descargable o personalizar el estilo (más técnico, más visual, con badges, etc.) también puedo hacerlo.
-
 ---
 
-# 📊 Dashboard de Inteligencia de Negocios
+# 📊 Proyecto Final Business Intelligence
 
 ## Modelo Predictivo de Ventas – *Balaji Fast Food*
 
-### Universidad Panamericana CDMX — Clase de Inteligencia de Negocios
-
+### Universidad Panamericana CDMX 
+### Integrantes del equipo:
+* Claudia Paola Chávez Pantiga
+* Pamela Carolina Hernández Medina
 ---
 
 ## 📝 **Introducción**
