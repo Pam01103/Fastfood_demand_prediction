@@ -8,13 +8,15 @@
 ### Integrantes del equipo:
 - Claudia Paola Chávez 
 - Pamela Carolina Hernández
-- Arantza Méndez 
+- Arantza Méndez Rodríguez
+- Juan José Tinajero Lara
+- Rodrigo Alexander Ullrich Dromundo
 ---
 
 ## 📝 **Introducción**
 
 Este proyecto desarrolla un **tablero interactivo** enfocado en el análisis y predicción de las ventas del negocio de comida rápida **Balaji Fast Food**.
-El objetivo es apoyar la toma de decisiones mediante el uso de **técnicas de Aprendizaje Automático (Machine Learning)** aplicadas a datos históricos del negocio.
+El objetivo es apoyar la toma de decisiones mediante el uso de **técnicas de Aprendizaje Automático (Machine Learning)** para **predecir la demanda futura**, permitiendo optimizar la planificación de inventario y mejorar la eficiencia operativa.
 
 En la industria de alimentos y bebidas, una estimación incorrecta de la demanda genera dos riesgos principales:
 
@@ -110,4 +112,3 @@ Este proyecto fue desarrollado para la clase de **Inteligencia de Negocios** en 
 
 ---
 
-Si quieres que le agregue screenshots del tablero, badges, una sección de instalación más detallada, o una explicación del modelo usado, ¡solo dímelo!
