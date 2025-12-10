@@ -6,8 +6,9 @@
 
 ### Universidad Panamericana CDMX 
 ### Integrantes del equipo:
-* Claudia Paola Chávez Pantiga
-* Pamela Carolina Hernández Medina
+*Claudia Paola Chávez Pantiga
+*Pamela Carolina Hernández Medina
+*Arantza Méndez Rodríguez
 ---
 
 ## 📝 **Introducción**
