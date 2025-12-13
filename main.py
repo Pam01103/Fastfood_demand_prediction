@@ -245,7 +245,13 @@ with tab2:
         
     )
     st.plotly_chart(fig, use_container_width=True)
+    st.markdown("""
+    > Esta visualización permite comparar cómo varía la demanda de cada ítem a 
+    lo largo de los días de la semana, destacando diferencias claras entre 
+    productos y días específicos.
 
+    A partir de estas visualizaciones, se identifican patrones claros de variación en la demanda por producto y por día, lo cual justifica el uso de análisis interactivo y modelos predictivos.
+    """)
 
 
     #st.divider()
