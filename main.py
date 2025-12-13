@@ -57,7 +57,7 @@ with tab1:
     ### El problema
     En el sector de alimentos y bebidas, la gestión de inventario y la dotación de
     personal son retos críticos. Si se subestima la demanda, se pierden ventas; si se
-    sobrestima, se incurre en desperdicio (costo) y en exceso de personal.
+    sobrestima, se incurre en desperdicio (costo) y en exceso de personal. :D
 
     ### Propuesta de negocio 
     Se propone desarrollar un ***Modelo Predictivo de Ventas*** utilizando técnicas de 
