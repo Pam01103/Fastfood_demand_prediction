@@ -97,7 +97,11 @@ with tab1:
     )
 
     st.plotly_chart(fig, use_container_width=True)
-    st.info("¿Qué quieren decir estos números?")
+    st.markdown("""####¿Qué quieren decir estos números?
+    > La *distribución* de las ventas de comida y bebidas es *casi idéntica*. 
+    Ambos tipos de ítems tienen un *rango de pedidos y variabilidad muy similares*, 
+    con las bebidas mostrando solo una mediana marginalmente mayor que la comida 
+    rápida.""")
 
 # -----------------------------------------------------------
 #  TAB 2: Exploración de Datos
@@ -125,9 +129,13 @@ with tab2:
     st.plotly_chart(fig, use_container_width=True)
     
     st.markdown("""
-    > Este box plot permite analizar la variabilidad en la cantidad vendida de cada 
-    ítem del menú, identificando productos con comportamientos más estables y 
-    aquellos con mayor dispersión o presencia de valores atípicos.
+    > A nivel de ítems, observamos que Panipuri (Fastfood) y Sugarcane juice 
+    (Beverages) son los productos que típicamente se venden en mayor cantidad 
+    por pedido, ambos con medianas alrededor de 8.5 a 9 unidades. Vadapav y Cold 
+    coffee registran las medianas más bajas (6-7 unidades). Aunque el jugo de 
+    caña tiene la mayor variabilidad en su 50% central de ventas, en general, 
+    todos los ítems comparten un rango de venta total muy similar, sugiriendo 
+    que los tamaños de pedido mínimo y máximo son consistentes en todo el menú.
     """)
     
     st.divider()
