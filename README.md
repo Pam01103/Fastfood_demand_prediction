@@ -111,4 +111,3 @@ Los integrantes del equipo son:
 - Rodrigo Alexander Ullrich Dromundo
 
 ---
-
