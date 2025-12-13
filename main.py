@@ -177,6 +177,8 @@ with tab2:
         xaxis_title="Semana",  # última fila, columna izquierda
         xaxis4_title="Semana",   # última fila, columna derecha
         yaxis4_title="",
+        yaxis6_title="",
+        yaxis8_title="",
         margin=dict(t=100),
         height=750,
     )
