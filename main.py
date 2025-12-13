@@ -18,9 +18,9 @@ st.caption("Proyecto desarrollado para Business Intelligence")
 # CARGA DE DATOS (placeholder)
 # -----------------------------------------------------------
 @st.cache_data
- url="Balaji Fast Food Sales.csv"
-     all_sheets=pd.read_excel(url, sheet_name=None)   
-     return all_sheets['Switchbacks']
+def load_data():
+    df=pd.read_csv("Balaji Fast Food Sales.csv")  
+     return df
 
 df = load_data()
 
