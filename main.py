@@ -141,10 +141,9 @@ with tab2:
     # -----------------------------------------------------------
     st.markdown("""### Distribución de la Cantidad Vendida por Ítem """) 
     
-    df['date'] = pd.to_datetime(df['date'])
+    df['date'] = pd.to_datetime(df['date'],errors='coerce' )
     df['week'] = df['date'].dt.to_period('W').dt.start_time
-    format='mixed'
-    
+        
     ventas_semanales = (
         df.groupby(['week', 'item_name', 'item_type'])['quantity']
         .sum()
