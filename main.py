@@ -165,14 +165,11 @@ with tab2:
         
     fig.update_layout(
         height=600,
-        margin=dict(t=80)
-    )
-        
-    fig.update_layout(
         xaxis_title="Semana",
         yaxis_title="Cantidad Vendida",
         margin=dict(t=100)
-    
+    )
+            
     st.plotly_chart(fig, use_container_width=True)
             
     
