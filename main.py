@@ -23,6 +23,18 @@ def load_data():
     return df
 
 df = load_data()
+time_options = sorted(df['time_of_sale'].dropna().unique())
+item_options = sorted(df['item_name'].unique())
+if 'date' in df.columns:
+    df['day_of_week_num'] = df['date'].dt.dayofweek
+    day_map = {0: 'Lunes', 1: 'Martes', 2: 'Miércoles', 3: 'Jueves', 4: 'Viernes', 5: 'Sábado', 6: 'Domingo'}
+    df['day_name_es'] = df['day_of_week_num'].map(day_map)
+    orden_dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+    item_options = sorted(df['item_name'].unique())
+else:
+    # Fallback si no hay columna 'date'
+    orden_dias = []
+    item_options = []
 
 # -----------------------------------------------------------
 # PESTAÑAS PRINCIPALES
@@ -263,3 +275,57 @@ with tab2:
         #st.metric("Menor cantidad por pedido", "6")
     #with col3:
         #st.metric("Favorito del público", "¿?")
+
+
+
+# -----------------------------------------------------------
+#  TAB 3: Toma de Decisiones
+# -----------------------------------------------------------
+with tab3:
+    st.header("🧠 Toma de Decisiones")
+    st.subheader("*¿Qué hacer con base en el historial?*")
+    ##Gráfica Barras
+    if orden_dias:
+        st.subheader("Demanda Semanal Promedio por Ítem")
+        default_items = list(item_options)
+        #Filtro multiple
+        selected_items = st.multiselect(
+            'Selecciona los Ítems para Analizar la Demanda Semanal :', 
+            options=item_options,
+            default=default_items, 
+            key='item_multiselect_tab3' 
+        )
+
+        if selected_items:
+            df_filtered = df[df['item_name'].isin(selected_items)].copy()
+            
+            if not df_filtered.empty:
+                ventas_pivot = df_filtered.pivot_table(
+                    index='day_name_es',
+                    columns='item_name',
+                    values='quantity',
+                    aggfunc='mean' 
+                ).reindex(orden_dias, fill_value=0).reset_index()
+
+                # Grafico
+                fig_stacked = px.bar(
+                    ventas_pivot,
+                    x='day_name_es',
+                    y=selected_items, # Lista de ítems para apilar
+                    title='Demanda Promedio Semanal por Ítem',
+                    labels={'day_name_es': 'Día de la Semana', 'value': 'Cantidad Promedio Vendida', 'item_name': 'Ítem'}
+                )
+                
+                fig_stacked.update_layout(
+                    xaxis_tickangle=-45,
+                    legend_title_text='Ítem'
+                )
+
+                st.plotly_chart(fig_stacked, use_container_width=True)
+            else:
+                 st.warning("No hay datos disponibles para los ítems seleccionados.")
+        else:
+            st.warning("Por favor, selecciona al menos un ítem para visualizar la demanda.")
+
+    st.divider()
+    
