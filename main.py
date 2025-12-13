@@ -139,8 +139,7 @@ with tab2:
     que los tamaños de pedido mínimo y máximo son consistentes en todo el menú.
     """)
     # -----------------------------------------------------------
-    st.markdown("""### Distribución de la Cantidad Vendida por Ítem """) 
-    
+       
     df['date'] = pd.to_datetime(df['date'],errors='coerce' )
     df['week'] = df['date'].dt.to_period('W').dt.start_time
         
