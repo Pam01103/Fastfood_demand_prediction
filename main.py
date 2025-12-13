@@ -53,11 +53,17 @@ tab1, tab2, tab3, tab4 = st.tabs([
 # -----------------------------------------------------------
 with tab1:
     st.header("📌 Contexto del Negocio")
+    st.subheader("Equipo:")
+    - Claudia P. Chávez Pantiga
+    - Pamela C. Hernández Medina
+    - Arantza Méndez Rodríguez
+    - Juan josé Tinajero Lara
+    - Rodrigo A. Ullrich Dromundo
     st.markdown("""
     ### El problema
     En el sector de alimentos y bebidas, la gestión de inventario y la dotación de
     personal son retos críticos. Si se subestima la demanda, se pierden ventas; si se
-    sobrestima, se incurre en desperdicio (costo) y en exceso de personal. :D
+    sobrestima, se incurre en desperdicio (costo) y en exceso de personal.
 
     ### Propuesta de negocio 
     Se propone desarrollar un ***Modelo Predictivo de Ventas*** utilizando técnicas de 
