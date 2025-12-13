@@ -188,11 +188,58 @@ with tab2:
     permite identificar tendencias, posibles patrones de crecimiento o estacionalidad
     en el consumo de ciertos productos.
     """)
+    # -----------------------------------------------------------
     
+    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+    df = df.dropna(subset=['date'])
 
+    df['day_of_week_num'] = df['date'].dt.dayofweek
+    
+    ventas_por_dia = (
+        df.groupby(['day_of_week_num', 'item_name'])['quantity']
+        .sum()
+        .reset_index()
+    )
+    
+    # Mapeo a español
+    day_map_es = {
+        0: 'Lunes',
+        1: 'Martes',
+        2: 'Miércoles',
+        3: 'Jueves',
+        4: 'Viernes',
+        5: 'Sábado',
+        6: 'Domingo'
+    }
+    
+    ventas_por_dia['day_name_es'] = ventas_por_dia['day_of_week_num'].map(day_map_es)
+    
+    orden_dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
 
+    fig = px.bar(
+        ventas_por_dia,
+        x='day_name_es',
+        y='quantity',
+        facet_col='item_name',       # equivale a col
+        facet_col_wrap=3,            # equivale a col_wrap
+        category_orders={
+            'day_name_es': orden_dias
+    },
+        title='Demanda Total por Día de la Semana, Separada por Ítem'
+    )
 
-
+    fig.update_xaxes(title_text="")
+    fig.update_yaxes(title_text="Cantidad Vendida")
+    
+    fig.update_xaxes(tickangle=-45)
+    
+    fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+    
+    fig.update_layout(
+        height=750,
+        margin=dict(t=100)
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
 
 
