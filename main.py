@@ -20,6 +20,9 @@ st.caption("Proyecto desarrollado para Business Intelligence")
 @st.cache_data
 def load_data():
     df=pd.read_csv("Balaji Fast Food Sales.csv")  
+    if 'date' in df.columns:
+        df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y', errors='coerce')
+        
     return df
 
 df = load_data()
@@ -284,6 +287,7 @@ with tab2:
 with tab3:
     st.header("🧠 Toma de Decisiones")
     st.subheader("*¿Qué hacer con base en el historial?*")
+    
     ##Gráfica Barras
     if orden_dias:
         st.subheader("Demanda Semanal Promedio por Ítem")
