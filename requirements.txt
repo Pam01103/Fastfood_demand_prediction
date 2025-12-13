@@ -1,5 +1,7 @@
 numpy
 pandas
 seaborn
-matplotlib.pyplot
+matplotlib
 warnings
+plotly
+openpyxl
