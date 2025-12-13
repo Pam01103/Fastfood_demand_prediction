@@ -163,11 +163,21 @@ with tab2:
         title='Tendencia de Ventas Semanales Separadas por Ítem'
     )
         
+    #fig.update_layout(
+       # height=600,
+       # xaxis_title="Semana",
+       # yaxis_title="Cantidad Vendida",
+       # margin=dict(t=100)
+   # )
+
+    fig.update_xaxes(title_text="")
+    fig.update_yaxes(title_text="Cantidad Vendida")
+    
     fig.update_layout(
-        height=600,
-        xaxis_title="Semana",
-        yaxis_title="Cantidad Vendida",
-        margin=dict(t=100)
+        xaxis7_title="Semana",  # última fila, columna izquierda
+        xaxis8_title="Semana"   # última fila, columna derecha
+        margin=dict(t=100),
+        height=750,
     )
             
     st.plotly_chart(fig, use_container_width=True)
