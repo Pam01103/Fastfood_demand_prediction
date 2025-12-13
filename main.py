@@ -58,7 +58,7 @@ with tab1:
         - Claudia P. Chávez Pantiga
         - Pamela C. Hernández Medina
         - Arantza Méndez Rodríguez
-        - Juan josé Tinajero Lara
+        - Juan J. Tinajero Lara
         - Rodrigo A. Ullrich Dromundo
         """)
     st.markdown("""
