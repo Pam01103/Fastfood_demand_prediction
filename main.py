@@ -138,18 +138,18 @@ with tab2:
     todos los ítems comparten un rango de venta total muy similar, sugiriendo 
     que los tamaños de pedido mínimo y máximo son consistentes en todo el menú.
     """)
-    
+    # -----------------------------------------------------------
     st.markdown("""### Distribución de la Cantidad Vendida por Ítem """) 
     
     df['date'] = pd.to_datetime(df['date'])
     df['week'] = df['date'].dt.to_period('W').dt.start_time
+    format='mixed'
     
     ventas_semanales = (
         df.groupby(['week', 'item_name', 'item_type'])['quantity']
         .sum()
         .reset_index()
     )
-    
     item_order = sorted(df['item_name'].unique())
     
     fig = px.line(
