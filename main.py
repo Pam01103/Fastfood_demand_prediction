@@ -170,7 +170,7 @@ with tab2:
        # margin=dict(t=100)
    # )
 
-    fig.update_xaxes(title_text="")
+    #fig.update_xaxes(title_text="")
     fig.update_yaxes(title_text="Cantidad Vendida")
     
     fig.update_layout(
