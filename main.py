@@ -54,7 +54,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
 with tab1:
     st.header("📌 Contexto del Negocio")
     st.subheader("Equipo:")
-     st.markdown("""
+    st.markdown("""
         - Claudia P. Chávez Pantiga
         - Pamela C. Hernández Medina
         - Arantza Méndez Rodríguez
