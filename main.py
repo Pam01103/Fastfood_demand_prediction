@@ -98,7 +98,7 @@ with tab1:
 
     st.plotly_chart(fig, use_container_width=True)
     st.markdown("""
-    *¿Qué quieren decir estos números?*
+    *¿Qué nos dice esta gráfica?*
     
     > La *distribución* de las ventas de comida y bebidas es *casi idéntica*. 
     Ambos tipos de ítems tienen un *rango de pedidos y variabilidad muy similares*, 
