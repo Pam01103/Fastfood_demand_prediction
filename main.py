@@ -184,7 +184,11 @@ with tab2:
     )
             
     st.plotly_chart(fig, use_container_width=True)
-            
+    st.markdown("""
+    > La gráfica muestra la evolución semanal de las ventas por ítem, lo que 
+    permite identificar tendencias, posibles patrones de crecimiento o estacionalidad
+    en el consumo de ciertos productos.
+    """)
     
 
 
