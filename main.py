@@ -237,7 +237,7 @@ with tab2:
     
     fig.update_layout(
         height=750,
-        margin=dict(t=100)
+        margin=dict(t=100),
         yaxis8_title="",
         yaxis9_title="",
         yaxis5_title="",
