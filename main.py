@@ -100,7 +100,7 @@ with tab1:
     st.markdown("""
     *¿Qué nos dice esta gráfica?*
     
-    > La *distribución* de las ventas de comida y bebidas es *casi idéntica*. 
+    > La **distribución** de las ventas de comida y bebidas es **casi idéntica**. 
     Ambos tipos de ítems tienen un *rango de pedidos y variabilidad muy similares*, 
     con las bebidas mostrando solo una mediana marginalmente mayor que la comida 
     rápida.
@@ -112,8 +112,6 @@ with tab1:
 with tab2:
     st.header("🔍 Exploración de Datos")
     st.subheader("*¿Cómo se comportan las ventas?*")
-    
-    st.markdown("""### Distribución de la Cantidad Vendida por Ítem """) 
     
     fig = px.box(
         df,
@@ -141,12 +139,55 @@ with tab2:
     que los tamaños de pedido mínimo y máximo son consistentes en todo el menú.
     """)
     
-    st.divider()
-    col1, col2, col3 = st.columns(3)
+    st.markdown("""### Distribución de la Cantidad Vendida por Ítem """) 
+    
+    df['date'] = pd.to_datetime(df['date'])
+    df['week'] = df['date'].dt.to_period('W').dt.start_time
+    
+    ventas_semanales = (
+        df.groupby(['week', 'item_name', 'item_type'])['quantity']
+        .sum()
+        .reset_index()
+    )
+    
+    item_order = sorted(df['item_name'].unique())
+    
+    fig = px.line(
+        ventas_semanales,
+        x='week',
+        y='quantity',
+        color='item_type',          # equivale a hue
+        facet_col='item_name',      # equivale a col
+        facet_col_wrap=2,           # equivale a col_wrap
+        category_orders={'item_name': item_order},
+        markers=True,
+        title='Tendencia de Ventas Semanales Separadas por Ítem'
+    )
+        
+    fig.update_layout(
+        height=600,
+        margin=dict(t=80)
+    )
+        
+    fig.update_xaxes(title="Semana")
+    fig.update_yaxes(title="Cantidad Vendida")
+    
+    st.plotly_chart(fig, use_container_width=True)
+            
+    
 
-    with col1:
-        st.metric("Mayor cantidad por pedido", "9")
-    with col2:
-        st.metric("Menor cantidad por pedido", "6")
-    with col3:
-        st.metric("Favorito del público", "¿?")
+
+
+
+
+
+
+    #st.divider()
+    #col1, col2, col3 = st.columns(3)
+
+    #with col1:
+      #  st.metric("Mayor cantidad por pedido", "9")
+    #with col2:
+        #st.metric("Menor cantidad por pedido", "6")
+    #with col3:
+        #st.metric("Favorito del público", "¿?")
