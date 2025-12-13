@@ -342,4 +342,157 @@ with tab3:
     - Por otro lado, *Panipuri* muestra la mayor debilidad con una **caída de más del 50% en 
     ventas** del Martes al Jueves.
     """)
+
+# -----------------------------------------------------------
+#  TAB 4: 📈 Predicción de Demanda
+# -----------------------------------------------------------
+with tab4:
+    st.header("📈 Predicción de Demanda")
+    RMSE_VALUE = 1.79
+    if orden_dias:
+        st.subheader("Estacionalidad Diaria de la Demanda por Producto (Promedio)")
+        st.markdown("Selecciona un ítem para ver cómo varía la **cantidad promedio** de ventas por transacción a lo largo de la semana, identificando los días pico para la planificación de inventario.")
+
+        # DropDown
+        selected_item = st.selectbox(
+            'Selecciona un Ítem del Menú para ver su Promedio Semanal:', 
+            options=item_options,
+            index=0,
+            key='single_select_item' # Usamos una key diferente para este selectbox
+        )
+
+        # Filtro y promedio promedio
+        demand_by_item = df[df['item_name'] == selected_item].pivot_table(
+            index='day_name_es',
+            values='quantity',
+            aggfunc='mean' # <-- Correcto: Calculando el promedio
+        ).reindex(orden_dias, fill_value=0).reset_index()
+ 
+        demand_by_item.columns = ['Día de la Semana', 'Cantidad Promedio Vendida']
+
+
+        # Grafica
+        fig_item_demand = px.line(
+            demand_by_item,
+            x='Día de la Semana',
+            # 🌟 CORRECCIÓN 2: Usar el nombre de columna correcto
+            y='Cantidad Promedio Vendida', 
+            title=f'Demanda Semanal Promedio del Ítem: {selected_item}',
+            markers=True
+        )
+
+        fig_item_demand.update_layout(
+            xaxis_title="Día de la Semana",
+            # 🌟 CORRECCIÓN 3: Título del eje Y
+            yaxis_title="Cantidad Promedio Vendida (Unidades)"
+        )
+        
+        st.plotly_chart(fig_item_demand, use_container_width=True)
+
+    st.divider()
+
+
+
+
+
+
+
+   # --- 3. Resultados y Desempeño del Modelo de Regresión (Tabla Restaurada) ---
+    st.subheader("3. Resultados y Desempeño del Modelo de Regresión")
+    st.markdown("""
+    El modelo de Aprendizaje Automático (ML), **Regresión Lineal/Ridge/Lasso**, se utiliza para predecir la cantidad (`quantity`) basándose en variables como el ítem, el momento de la venta y el monto de la transacción.
+    """)
     
+    # ** CÓDIGO DE LA TABLA RESTAURADO **
+    st.dataframe(
+        pd.DataFrame({
+            'Modelo': ['Regresión Lineal', 'Mejor Modelo (Lasso)'],
+            'Métrica (RMSE)': ['$1.79$', f'${RMSE_VALUE}$'], 
+            'Interpretación': [
+                'El error promedio de predicción inicial fue de $\pm 1.79$ ítems.',
+                f'La optimización de hiperparámetros **no** mejoró el error de predicción, manteniéndose en $\pm {RMSE_VALUE}$ ítems. (Mejores parámetros: regressor=Lasso(), regressor__alpha: 0.01)'
+            ]
+        }),
+        hide_index=True,
+    )
+    
+    st.caption(f"Un RMSE de ${RMSE_VALUE}$ sobre una media de ventas por pedido de $8.16$ es aceptable, pero sugiere que faltan variables clave (como clima o eventos especiales).")
+    st.divider()
+
+    # --- 4. Interfaz de Predicción Simulada (Simulador interactivo) ---
+    st.subheader("4. 🔮 Interfaz de Predicción Simulada")
+    st.markdown("Prueba la capacidad de predicción del modelo seleccionando un ítem y el momento de venta, y visualiza la demanda pronosticada junto con el margen de error estimado.")
+
+    # Asegúrate de que time_options esté definido al inicio del script
+    try:
+        time_options = sorted(df['time_of_sale'].dropna().unique())
+    except:
+        time_options = ['Mañana', 'Tarde', 'Noche'] # Fallback
+    
+    with st.form("prediction_form"):
+        
+        col_item, col_time = st.columns(2)
+
+        with col_item:
+            sim_item = st.selectbox(
+                'Ítem a Pronosticar:', 
+                options=item_options,
+                index=0,
+                key='sim_item'
+            )
+        
+        with col_time:
+            sim_time = st.selectbox(
+                'Momento de la Venta (Simulación):', 
+                options=time_options,
+                index=0,
+                key='sim_time'
+            )
+            
+        submitted = st.form_submit_button("Pronosticar Demanda")
+
+    if submitted:
+        # --- SIMULATION LOGIC ---
+        
+        # 1. Get historical average quantity for the selected item (Simulation basis)
+        avg_quantity_sim = df[(df['item_name'] == sim_item) & (df['time_of_sale'] == sim_time)]['quantity'].mean()
+        
+        # 2. Use the RMSE provided
+        rmse = RMSE_VALUE
+        
+        # Handle cases where no data exists for the specific item/time combination
+        if pd.isna(avg_quantity_sim):
+            predicted_quantity = df['quantity'].mean() 
+            st.warning(f"No hay datos históricos para {sim_item} en {sim_time}. Usando el promedio general de ventas ({round(predicted_quantity, 1)}).")
+        else:
+            predicted_quantity = avg_quantity_sim
+        
+        # 3. Calculate Prediction and Error Margin
+        predicted_quantity = round(predicted_quantity, 1)
+        lower_bound = max(0, round(predicted_quantity - rmse, 1)) 
+        upper_bound = round(predicted_quantity + rmse, 1)
+        
+        # 4. Display Results
+        
+        st.success(f"### Predicción Simulada para: {sim_item} en {sim_time}")
+        
+        col_pred, col_error = st.columns([1, 2])
+        
+        with col_pred:
+            st.metric(
+                label="Cantidad Pronosticada (Ítems)", 
+                value=f"{predicted_quantity}"
+            )
+        
+        with col_error:
+             st.markdown(f"""
+             **Margen de Error (Basado en RMSE ${RMSE_VALUE}$):**
+             
+             El modelo predice con un error promedio de **$\pm {rmse}$ ítems**.
+             
+             **Rango de Demanda Real Estimado:**
+             **{lower_bound}** a **{upper_bound}** ítems.
+             """)
+        
+        st.caption("Esta predicción se basa en el promedio histórico del ítem seleccionado, ajustado por el momento del día. Utiliza el RMSE del modelo de regresión para estimar el rango de error.")
+        st.info(f"**Descargo de Responsabilidad (Disclaimer):** Esta es solo una simulación, no un pronóstico en tiempo real. Para ver el modelo predictivo de Machine Learning y su código completo, por favor, visita el repositorio de Colab: [Pegar Aquí el Link al Colab]")
