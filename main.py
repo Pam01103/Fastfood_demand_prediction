@@ -175,7 +175,7 @@ with tab2:
     
     fig.update_layout(
         xaxis7_title="Semana",  # última fila, columna izquierda
-        xaxis8_title="Semana"   # última fila, columna derecha
+        xaxis8_title="Semana",   # última fila, columna derecha
         margin=dict(t=100),
         height=750,
     )
