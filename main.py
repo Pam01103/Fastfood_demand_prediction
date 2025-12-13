@@ -341,14 +341,13 @@ with tab3:
 
     st.divider()
     st.markdown("""
-    - La **demanda agregada semanal** de los productos es **mayor** durante el *Martes* y el 
+    - La **demanda agregada semanal** de los productos es **mayor** durante el *Lunes*, *Jueves* y *Domingo* y el 
     *Domingo*, siendo el *Sábado* el día con el **volumen de ventas más bajo**. 
     
-    - El volumen máximo del **Martes** se debe al pico de ventas de *Vadapav y Sugarcane juice*, mientras
-    que el pico individual más alto de toda la semana corresponde a *Frankie* el **Jueves**. 
+    - El volumen máximo del **Jueves** se debe al pico de ventas de *Aalopuri*. 
     
     - Por otro lado, *Panipuri* muestra la mayor debilidad con una **caída de más del 50% en 
-    ventas** del Martes al Jueves.
+    ventas** entre Viernes y Martes.
     """)
 
 # -----------------------------------------------------------
