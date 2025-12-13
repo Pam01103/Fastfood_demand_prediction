@@ -5,12 +5,6 @@
 ## Modelo Predictivo de Ventas – *Balaji Fast Food*
 
 ### Universidad Panamericana CDMX 
-### Integrantes del equipo:
-- Claudia Paola Chávez 
-- Pamela Carolina Hernández
-- Arantza Méndez Rodríguez
-- Juan José Tinajero Lara
-- Rodrigo Alexander Ullrich Dromundo
 ---
 
 ## 📝 **Introducción**
@@ -109,6 +103,12 @@ El modelo predictivo apoya la eficiencia del negocio, reduce costos y respalda d
 ## 👩🏻‍🏫 **Proyecto académico**
 
 Este proyecto fue desarrollado para la clase de **Inteligencia de Negocios** en la **Universidad Panamericana CDMX**, integrando análisis de datos, visualización y machine learning en una solución práctica aplicable al sector de alimentos y bebidas.
+Los integrantes del equipo son:
+- Claudia Paola Chávez 
+- Pamela Carolina Hernández
+- Arantza Méndez Rodríguez
+- Juan José Tinajero Lara
+- Rodrigo Alexander Ullrich Dromundo
 
 ---
 
